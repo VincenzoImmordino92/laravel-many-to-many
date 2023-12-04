@@ -149,6 +149,16 @@ class ProjectController extends Controller
         $form_modifica_data['end_date'] = date('Y-m-d'); */
 
         $project->update($form_modifica_data);
+
+        if(array_key_exists('technologies',$form_modifica_data)){
+            //aggiorno le relazioni tra i miei progetti e le mie tecnologie eliminando le relazioni che sono state tolte e aggiungendone nuove
+            //sync accetta un array creando tutte le relazioni tra i progetti e le tecnologie ed eliminandone le eventuali relazioni che sono state tolte
+            $project->technologies()->sync($form_modifica_data['technologies']);
+        }else{
+            //elimino tutte le relazioni tra i progetti e le tecnologie
+            $project->technologies()->detach();
+        }
+
         return redirect()->route('admin.projects.show', $project);
     }
 
@@ -160,6 +170,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        //non elimino le relazioni tra i progetti e le tecnologie perchè nella migration ho inserito cascadeOnDelete() altrimenti avrei dovuto fare: $project->technologies->detach();
         //se il post contiene un immagine vuol dire che la devo eliminare
         if($project->image){
             Storage::disk('public')->delete($project->image);

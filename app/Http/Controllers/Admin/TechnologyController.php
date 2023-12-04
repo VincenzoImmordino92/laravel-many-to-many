@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Technology;
+use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Functions\Helper;
 class TechnologyController extends Controller
@@ -17,6 +19,11 @@ class TechnologyController extends Controller
     {
         $technologies = Technology::orderBy('id','desc')->get();
         return view('admin.technologies.index', compact('technologies'));
+    }
+
+    public function projectsTechnologies(Technology $technology){
+        $projects= $technology->projects;
+        return view('admin.technologies.projectTechnology', compact('projects','technology'));
     }
 
     /**
