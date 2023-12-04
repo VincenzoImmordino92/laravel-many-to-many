@@ -21,6 +21,16 @@
 
     <div class="container_custom">
         <h3 class="title text-decoration-underline">{{$project->title}}</h3>
+        <p>Le <strong>Tecnologie</strong>  per il progetto sono: {{ count($project->technologies)}}</p>
+
+        @forelse ($project->technologies as $technology)
+        <span class="badge text-bg-dark my-3">{{$technology->name}}</span>
+        @empty
+            -
+        @endforelse
+
+
+
         @if($project->type)
         <p>Tipo: <strong>{{ $project->type?->name }}</strong></p>
         @endif

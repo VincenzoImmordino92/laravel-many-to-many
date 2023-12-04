@@ -21,7 +21,7 @@ return new class extends Migration
                 ->cascadeOnDelete(); // se viene cancellato un progetto a sua volta viene eliminata la relazione con la tabella ponte
 
                 //colonna in realzione con le technology
-                $table->unsignedBigInteger('Technology_id');
+                $table->unsignedBigInteger('technology_id');
                 //creazione della Fk della colonna technology_id
                 $table->foreign('technology_id')
                     ->references('id')

@@ -17,6 +17,12 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function technologies(){
+        //relazione many to many con la tabella technologies quindi comunica con projects
+        return $this->belongsToMany(Technology::class);
+    }
+
+
     protected $fillable =[
         'title',
         'type_id',

@@ -23,6 +23,7 @@
             <th scope="col">Nome Progetto</th>
             <th scope="col">Data di inizio</th>
             <th scope="col">Tipo</th>
+            <th scope="col">Tecnologie</th>
             <th scope="col">Azioni</th>
         </tr>
         </thead>
@@ -32,7 +33,14 @@
             <td>{{$project->id}}</td>
             <td>{{$project->title}}</td>
             <td>{{$project->start_date}}</td>
-            <td>{{$project->type?->name ?? '-'}}</td>
+            <td>{{$project->type->name ?? '-'}}</td>
+            <td>
+                @forelse ($project->technologies as $technology)
+                <span class="badge text-bg-light">{{$technology->name}}</span>
+                @empty
+                -
+                @endforelse
+            </td>
             <td><a class="btn btn-success" href="{{route('admin.projects.show',$project)}}"><i class="fa-solid fa-eye"></i></a>
                 <a class="btn btn-warning" href="{{route('admin.projects.edit',$project)}}"><i class="fa-solid fa-pencil"></i></a>
                 @include('admin.partials.delete_button',[
