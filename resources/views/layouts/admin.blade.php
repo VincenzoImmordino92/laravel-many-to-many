@@ -16,7 +16,7 @@
         @include('admin.partials.header')
         <div class="main-wrapper d-flex">
             @include('admin.partials.sidebar')
-            <div class="m-3 w-100 overflow-x-auto">
+            <div class="p-4 w-100 overflow-x-auto custom_topic">
                 @yield('content')
             </div>
 

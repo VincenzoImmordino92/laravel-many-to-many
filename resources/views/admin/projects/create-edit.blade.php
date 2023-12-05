@@ -64,7 +64,7 @@
                             @elseif(!$errors->any() && $project?->technologies->contains($technology))
                                 checked
                             @endif>
-                    <label class="btn btn-outline-primary" for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
+                    <label class="btn btn-outline-secondary" for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
 
                     @endforeach
                 </div>
